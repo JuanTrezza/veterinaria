@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Clínica Veterinaria - Mis Mascotas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- AOS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <link rel="icon" href="imagenes/logoMascota.png" type="image/png">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body style="font-family: 'Poppins', sans-serif;">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="imagenes/logoMascota.png" alt="Logo Clínica" class="me-2" height="45">
+        <span class="fw-bold text-dark">Clínica Veterinaria</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-dark" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link text-dark active" href="mascotas.html">Mascotas</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">Turnos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="misturnos.html">Ver mis turnos</a></li>
+              <li><a class="dropdown-item" href="turnos.html">Pedir turnos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link text-dark" href="micuenta.html">Mi cuenta</a></li>
+          <li class="nav-item"><a id="authLink" class="btn btn-warning text-white ms-lg-3" href="login.html">Iniciar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="py-5 text-center bg-light" data-aos="fade-down">
+    <div class="container">
+      <h1 class="fw-bold text-warning mb-3">Mis Mascotas</h1>
+      <p class="text-muted">Gestioná tus mascotas registradas y agregá nuevas para poder solicitar turnos.</p>
+    </div>
+  </header>
+
+  <!-- REGISTRAR MASCOTA -->
+  <section id="registrar" class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6" data-aos="zoom-in">
+          <div class="card shadow-sm border-0 p-4">
+            <h4 class="text-center mb-4 text-warning"><i class="fa-solid fa-paw me-2"></i>Registrar Nueva Mascota</h4>
+
+            <!-- Formulario con subida de foto -->
+            <form id="formMascota" enctype="multipart/form-data">
+              <div class="mb-3">
+                <label for="nombreMascota" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombreMascota" placeholder="Ej: Firulais" required>
+              </div>
+              <div class="mb-3">
+                <label for="tipoMascota" class="form-label">Tipo</label>
+                <select id="tipoMascota" class="form-select" required>
+                  <option value="">Seleccionar...</option>
+                  <option value="Perro">Perro</option>
+                  <option value="Gato">Gato</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="edadMascota" class="form-label">Edad (en años)</label>
+                <input type="number" class="form-control" id="edadMascota" placeholder="Ej: 3">
+              </div>
+              <div class="mb-3">
+                <label for="fotoMascota" class="form-label">Foto</label>
+                <input type="file" class="form-control" id="fotoMascota" accept="image/*">
+                <img id="previewFoto" src="" class="img-thumbnail mt-3" style="display:none;max-height:150px;object-fit:cover;">
+              </div>
+              <button type="submit" class="btn btn-warning w-100 text-white">Agregar Mascota</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTA DE MASCOTAS -->
+  <section id="listaMascotas" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-4" data-aos="fade-up">Mascotas Registradas</h2>
+      <div class="row g-4 justify-content-center" id="contenedorMascotas">
+        <!-- Se cargan las mascotas desde la API -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-light py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-0">© 2025 Clínica Veterinaria — Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap & AOS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init({ duration: 1000, once: true });</script>
+
+  <!-- SCRIPT FUNCIONAL -->
+  <script>
+    const API = "http://localhost/veterinaria/api";
+    const token = localStorage.getItem("token");
+    const formMascota = document.getElementById("formMascota");
+    const contenedorMascotas = document.getElementById("contenedorMascotas");
+
+    if (!token) {
+      alert("Debes iniciar sesión para ver tus mascotas.");
+      window.location.href = "login.html";
+    }
+
+    // 🖼️ Preview de imagen
+    document.getElementById("fotoMascota").addEventListener("change", function() {
+      const file = this.files[0];
+      const preview = document.getElementById("previewFoto");
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+      } else {
+        preview.src = "";
+        preview.style.display = "none";
+      }
+    });
+
+    // 🐶 Cargar mascotas
+    async function cargarMascotas() {
+      try {
+        const res = await fetch(`${API}/mascotas`, {
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+        const data = await res.json();
+        mostrarMascotas(data);
+      } catch (error) {
+        console.error("Error al cargar mascotas:", error);
+      }
+    }
+
+    // 🐕 Mostrar mascotas
+    function mostrarMascotas(lista) {
+      contenedorMascotas.innerHTML = "";
+      if (!lista || lista.length === 0) {
+        contenedorMascotas.innerHTML = `<p class="text-center text-muted">No tenés mascotas registradas.</p>`;
+        return;
+      }
+
+      lista.forEach(m => {
+        const card = document.createElement("div");
+        card.classList.add("col-md-4");
+        card.setAttribute("data-aos", "zoom-in");
+        card.innerHTML = `
+          <div class="card border-0 shadow-sm h-100">
+            <img src="${m.foto ? API + '/' + m.foto : 'src/defaultpet.jpg'}"
+                 class="card-img-top"
+                 alt="${m.nombre}"
+                 style="height:220px;object-fit:cover;">
+            <div class="card-body text-center">
+              <h5 class="card-title text-warning">${m.nombre}</h5>
+              <p class="card-text mb-1"><strong>Tipo:</strong> ${m.especie || m.tipo}</p>
+              <p class="card-text"><strong>Edad:</strong> ${m.edad || "-"} años</p>
+              <button class="btn btn-sm btn-outline-danger mt-2" onclick="eliminarMascota(${m.id})">
+                <i class="fa-solid fa-trash me-1"></i>Eliminar
+              </button>
+            </div>
+          </div>
+        `;
+        contenedorMascotas.appendChild(card);
+      });
+    }
+
+    // ➕ Registrar nueva mascota con foto
+    formMascota.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append("nombre", document.getElementById("nombreMascota").value.trim());
+      formData.append("especie", document.getElementById("tipoMascota").value);
+      formData.append("edad", document.getElementById("edadMascota").value || 0);
+      const foto = document.getElementById("fotoMascota").files[0];
+      if (foto) formData.append("foto", foto);
+
+      try {
+        const res = await fetch(`${API}/mascotas`, {
+          method: "POST",
+          headers: { "Authorization": `Bearer ${token}` },
+          body: formData
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("🐶 Mascota registrada correctamente.");
+          formMascota.reset();
+          document.getElementById("previewFoto").style.display = "none";
+          cargarMascotas();
+        } else {
+          alert("Error: " + (data.error || "No se pudo registrar la mascota."));
+        }
+      } catch (error) {
+        console.error("Error al registrar mascota:", error);
+        alert("Error de conexión con el servidor.");
+      }
+    });
+
+    // 🗑️ Eliminar mascota
+    async function eliminarMascota(id) {
+      if (!confirm("¿Seguro que querés eliminar esta mascota?")) return;
+      try {
+        const res = await fetch(`${API}/mascotas/${id}`, {
+          method: "DELETE",
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+        const data = await res.json();
+        if (res.ok) {
+          alert("Mascota eliminada correctamente.");
+          cargarMascotas();
+        } else {
+          alert(data.error || "No se pudo eliminar la mascota.");
+        }
+      } catch (error) {
+        console.error("Error al eliminar mascota:", error);
+        alert("Error de conexión con el servidor.");
+      }
+    }
+
+    cargarMascotas();
+  </script>
+</body>
+</html>
+
+
+

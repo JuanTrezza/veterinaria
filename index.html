@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Clínica Veterinaria - Inicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- AOS Animation -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="imagenes/logoMascota.png" />
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body style="font-family: 'Poppins', sans-serif;">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="imagenes/logoMascota.png" alt="Logo Clínica" class="me-2" height="45">
+        <span class="fw-bold text-dark">Clínica Veterinaria</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-dark" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="mascotas.html">Mascotas</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">Turnos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="misturnos.html">Ver mis turnos</a></li>
+              <li><a class="dropdown-item" href="turnos.html">Pedir turnos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link text-dark" href="micuenta.html">Mi cuenta</a></li>
+          <li class="nav-item"><a id="authLink" class="btn btn-warning text-white ms-lg-3" href="login.html">Iniciar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO / CARRUSEL -->
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="imagenes/hero-1.jpg" class="d-block w-100" alt="Consulta veterinaria" style="height:500px; object-fit:cover;">
+        <div class="carousel-caption d-none d-md-block" data-aos="fade-up">
+          <h1 class="fw-bold">Cuidado experto y cercano</h1>
+          <p>Profesionales que aman lo que hacen.</p>
+          <a href="turnos.html" class="btn btn-warning text-white">Reservar Turno</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="imagenes/imagen4.jpg" class="d-block w-100" alt="Vacunación" style="height:500px; object-fit:cover;">
+        <div class="carousel-caption d-none d-md-block" data-aos="fade-up">
+          <h1 class="fw-bold">Vacunación y prevención</h1>
+          <p>Protegemos a tu mascota en cada etapa.</p>
+          <a href="#servicios" class="btn btn-outline-light">Ver Servicios</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="imagenes/imagen2.jpg" class="d-block w-100" alt="Laboratorio veterinario" style="height:500px; object-fit:cover;">
+        <div class="carousel-caption d-none d-md-block" data-aos="fade-up">
+          <h1 class="fw-bold">Diagnóstico por laboratorio</h1>
+          <p>Resultados rápidos y precisos.</p>
+          <a href="#informacion" class="btn btn-warning text-white">Más información</a>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="py-5 bg-white">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-4" data-aos="fade-up">Nuestros Servicios</h2>
+      <p class="text-muted mb-5" data-aos="fade-up">Cuidado integral para perros y gatos</p>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="zoom-in">
+          <div class="card border-0 shadow-sm h-100">
+            <img src="imagenes/hero-4.jpg" class="card-img-top" alt="Consultas">
+            <div class="card-body">
+              <h5 class="card-title">Consultas y Chequeos</h5>
+              <p class="card-text">Atención veterinaria general y personalizada para tu mascota.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card border-0 shadow-sm h-100">
+            <img src="imagenes/imagen3.jpg" class="card-img-top" alt="Vacunación">
+            <div class="card-body">
+              <h5 class="card-title">Vacunación</h5>
+              <p class="card-text">Calendario completo y productos de primera calidad.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card border-0 shadow-sm h-100">
+            <img src="imagenes/imagen5.jpg" class="card-img-top" alt="Laboratorio">
+            <div class="card-body">
+              <h5 class="card-title">Laboratorio Clínico</h5>
+              <p class="card-text">Análisis rápidos y confiables para diagnósticos precisos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFORMACIÓN ÚTIL -->
+  <section id="informacion" class="py-5 bg-light">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-4" data-aos="fade-up">Información Útil</h2>
+      <p class="text-muted mb-5" data-aos="fade-up">Indicaciones, coberturas y preguntas frecuentes</p>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-3" data-aos="zoom-in">
+          <div class="card shadow-sm border-0 p-4 h-100">
+            <i class="fa-solid fa-notes-medical fa-2x text-warning mb-3"></i>
+            <h5>Indicaciones</h5>
+            <p>Consejos previos a estudios y atención veterinaria.</p>
+            <a href="#" class="btn btn-outline-warning btn-sm mt-2">Leer más</a>
+          </div>
+        </div>
+        <div class="col-md-3" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card shadow-sm border-0 p-4 h-100">
+            <i class="fa-solid fa-shield-dog fa-2x text-warning mb-3"></i>
+            <h5>Coberturas</h5>
+            <p>Planes y beneficios para tus mascotas.</p>
+            <a href="#" class="btn btn-outline-warning btn-sm mt-2">Ver coberturas</a>
+          </div>
+        </div>
+        <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card shadow-sm border-0 p-4 h-100">
+            <i class="fa-solid fa-circle-question fa-2x text-warning mb-3"></i>
+            <h5>Preguntas Frecuentes</h5>
+            <p>Resolvé tus dudas sobre turnos, vacunas y servicios.</p>
+            <a href="#" class="btn btn-outline-warning btn-sm mt-2">Ver preguntas</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-light py-4">
+    <div class="container">
+      <div class="row text-center text-md-start">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5 class="text-warning">Clínica Veterinaria</h5>
+          <p>Atención cálida, profesional y cercana. Cuidamos a tu mascota como parte de nuestra familia.</p>
+        </div>
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5 class="text-warning">Contacto</h5>
+          <p><i class="fa-solid fa-phone me-2"></i> +54 11 1234-5678</p>
+          <p><i class="fa-solid fa-envelope me-2"></i> info@veterinaria.com</p>
+          <p><i class="fa-solid fa-location-dot me-2"></i> Av. Principal 1234, Buenos Aires</p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="text-warning">Redes</h5>
+          <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="#" class="text-light"><i class="fab fa-whatsapp fa-lg"></i></a>
+        </div>
+      </div>
+      <hr class="border-secondary mt-4">
+      <p class="text-center mb-0">© 2025 Clínica Veterinaria — Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap & AOS Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

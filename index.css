@@ -1,0 +1,170 @@
+/* ======== ESTILOS BASE ======== */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* ======== NAVBAR ======== */
+.navbar {
+  padding: 0.8rem 0;
+}
+.navbar-brand span {
+  font-size: 1.25rem;
+}
+.nav-link {
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.nav-link:hover {
+  color: #f97316 !important;
+}
+.btn-warning {
+  background-color: #f97316;
+  border-color: #f97316;
+}
+.btn-warning:hover {
+  background-color: #e2610f;
+  border-color: #e2610f;
+}
+
+/* ======== HERO / CARRUSEL ======== */
+.carousel-item img {
+  height: 480px;
+  object-fit: cover;
+  filter: brightness(0.85);
+}
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  border-radius: 10px;
+}
+.carousel-caption h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.carousel-caption p {
+  font-size: 1.1rem;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+/* ======== SECCIONES GENERALES ======== */
+section {
+  padding: 60px 0;
+}
+section h2 {
+  font-weight: 700;
+  color: #222;
+}
+section p {
+  color: #555;
+}
+
+/* ======== SERVICIOS ======== */
+#servicios .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#servicios .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+#servicios .card-img-top {
+  height: 220px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+#servicios .card-title {
+  color: #f97316;
+  font-weight: 600;
+}
+
+/* ======== INFORMACIÓN ÚTIL ======== */
+#informacion .card {
+  transition: all 0.3s ease;
+}
+#informacion .card:hover {
+  transform: translateY(-5px);
+  background-color: #fff7f0;
+}
+#informacion i {
+  transition: transform 0.3s ease;
+}
+#informacion .card:hover i {
+  transform: scale(1.2);
+}
+
+/* ======== FOOTER ======== */
+footer {
+  background-color: #111;
+  color: #ddd;
+  font-size: 0.95rem;
+}
+footer h5 {
+  color: #f97316;
+  font-weight: 600;
+}
+footer a {
+  color: #f2f2f2;
+  transition: color 0.2s ease;
+}
+footer a:hover {
+  color: #f97316;
+}
+footer hr {
+  opacity: 0.2;
+}
+
+/* ======== BOTÓN WHATSAPP (opcional) ======== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  padding: 15px;
+  font-size: 22px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+}
+.whatsapp-float:hover {
+  background-color: #1eb65b;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+  .carousel-caption h1 {
+    font-size: 1.5rem;
+  }
+  .carousel-caption p {
+    font-size: 0.95rem;
+  }
+  section {
+    padding: 40px 0;
+  }
+  #servicios .card-img-top {
+    height: 180px;
+  }
+}
+@media (max-width: 576px) {
+  .navbar-brand span {
+    font-size: 1rem;
+  }
+  .carousel-item img {
+    height: 360px;
+  }
+  .carousel-caption {
+    padding: 10px;
+  }
+  footer {
+    text-align: center;
+  }
+}

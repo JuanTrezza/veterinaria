@@ -1,0 +1,18 @@
+/* ======== TURNOS ======== */
+#turnos .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#turnos .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+#turnos i {
+  color: #f97316;
+}
+#turnos .btn-warning {
+  background-color: #f97316;
+  border: none;
+}
+#turnos .btn-warning:hover {
+  background-color: #e2610f;
+}

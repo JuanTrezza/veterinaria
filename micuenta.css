@@ -1,0 +1,15 @@
+/* ===== PERFIL ===== */
+#perfil .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#perfil .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+#perfil i {
+  color: #f97316;
+}
+#perfil .badge {
+  font-size: 1rem;
+  padding: 0.5em 0.8em;
+}

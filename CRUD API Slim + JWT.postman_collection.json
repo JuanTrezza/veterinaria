@@ -1,0 +1,205 @@
+{
+  "info": {
+    "_postman_id": "veterinaria-api-full",
+    "name": "Veterinaria API COMPLETA",
+    "description": "Colección completa para probar la API de gestión de turnos veterinaria (usuario + admin).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Registrar usuario",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"usuario@mail.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": { "raw": "http://localhost/veterinaria/api/usuarios/registro", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "usuarios", "registro"] }
+      }
+    },
+    {
+      "name": "Login usuario",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"usuario@mail.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": { "raw": "http://localhost/veterinaria/api/usuarios/login", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "usuarios", "login"] }
+      }
+    },
+    {
+      "name": "Registrar administrador (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token_admin}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin2@mail.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": { "raw": "http://localhost/veterinaria/api/admin/registro", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "admin", "registro"] }
+      }
+    },
+    {
+      "name": "Agregar mascota",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Firulais\",\n  \"especie\": \"Perro\",\n  \"edad\": 3\n}"
+        },
+        "url": { "raw": "http://localhost/veterinaria/api/mascotas", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "mascotas"] }
+      }
+    },
+    {
+      "name": "Listar mascotas (usuario)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "http://localhost/veterinaria/api/mascotas", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "mascotas"] }
+      }
+    },
+    {
+      "name": "Listar mascotas (admin)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token_admin}}" }],
+        "url": { "raw": "http://localhost/veterinaria/api/admin/mascotas", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "admin", "mascotas"] }
+      }
+    },
+    {
+      "name": "Ver turnos disponibles",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "http://localhost/veterinaria/api/turnos/disponibles", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "turnos", "disponibles"] }
+      }
+    },
+    {
+      "name": "Solicitar turno",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id_mascota\": 1,\n  \"id_turno_disponible\": 5\n}"
+        },
+        "url": { "raw": "http://localhost/veterinaria/api/turnos", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "turnos"] }
+      }
+    },
+    {
+      "name": "Ver mis turnos (usuario)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "http://localhost/veterinaria/api/turnos/mis-turnos", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "turnos", "mis-turnos"] }
+      }
+    },
+    {
+      "name": "Cancelar turno (usuario)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "http://localhost/veterinaria/api/turnos/1", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "turnos", "1"] }
+      }
+    },
+    {
+      "name": "Listar usuarios (admin)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token_admin}}" }],
+        "url": { "raw": "http://localhost/veterinaria/api/admin/usuarios", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "admin", "usuarios"] }
+      }
+    },
+    {
+      "name": "Listar todos los turnos (admin)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token_admin}}" }],
+        "url": { "raw": "http://localhost/veterinaria/api/admin/turnos", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "admin", "turnos"] }
+      }
+    },
+    {
+      "name": "Cambiar estado del turno (admin)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token_admin}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"estado\": \"asistido\",\n  \"costo\": 1500.00,\n  \"descripcion\": \"Consulta y vacunas.\"\n}"
+        },
+        "url": { "raw": "http://localhost/veterinaria/api/admin/turnos/1", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "admin", "turnos", "1"] }
+      }
+    },
+    {
+      "name": "Generar turnos disponibles (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token_admin}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"dias\": 14\n}"
+        },
+        "url": { "raw": "http://localhost/veterinaria/api/admin/turnos-disponibles/generar", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "admin", "turnos-disponibles", "generar"] }
+      }
+    },
+    {
+      "name": "Desactivar día(s) (admin)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token_admin}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fechas\": [\"2025-07-02\", \"2025-07-03\"]\n}"
+        },
+        "url": { "raw": "http://localhost/veterinaria/api/admin/turnos-disponibles/desactivar-dia", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "admin", "turnos-disponibles", "desactivar-dia"] }
+      }
+    },
+    {
+      "name": "Consultar turnos por fecha",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fecha\": \"2025-07-02\"\n}"
+        },
+        "url": { "raw": "http://localhost/veterinaria/api/turnos-disponibles/fecha", "protocol": "http", "host": ["localhost"], "path": ["veterinaria", "api", "turnos-disponibles", "fecha"] }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "token", "value": "" },
+    { "key": "token_admin", "value": "" }
+  ]
+}
+
+
+

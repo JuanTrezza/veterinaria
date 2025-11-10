@@ -1,0 +1,43 @@
+/* Paleta */
+:root {
+  --brand: #f97316;
+  --brand-dark: #e2610f;
+}
+
+/* Tarjetas */
+.card { border-radius: 14px; }
+.card .form-control,
+.card .form-select { padding: .8rem .9rem; }
+
+/* Botón ojo password */
+.btn-eye {
+  position: absolute;
+  right: 10px;
+  top: 36px;
+  border: 0;
+  background: transparent;
+  color: #888;
+}
+.btn-eye:hover { color: #555; }
+
+/* Botones marca */
+.btn-warning {
+  background-color: var(--brand);
+  border-color: var(--brand);
+}
+.btn-warning:hover {
+  background-color: var(--brand-dark);
+  border-color: var(--brand-dark);
+}
+
+/* Navbar */
+.navbar { padding: .7rem 0; }
+.nav-link:hover { color: var(--brand) !important; }
+
+/* Footer */
+footer small { color: #bbb; }
+
+/* Responsive */
+@media (max-width: 576px) {
+  .card-body { padding: 1.25rem !important; }
+}
