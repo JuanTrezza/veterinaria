@@ -1,0 +1,92 @@
+{
+  "name": "Clínica Veterinaria",
+  "short_name": "VetClinic",
+  "description": "Sistema de gestión para clínica veterinaria - Turnos, mascotas y atención profesional",
+  "start_url": "/veterinaria/index.html",
+  "scope": "/veterinaria/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff9800",
+  "orientation": "portrait-primary",
+  "lang": "es-AR",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/veterinaria/imagenes/logoMascota.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/veterinaria/imagenes/logoMascota.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/veterinaria/imagenes/screenshot-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/veterinaria/imagenes/screenshot-2.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["health", "medical", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Mis Turnos",
+      "short_name": "Turnos",
+      "description": "Ver mis turnos programados",
+      "url": "/veterinaria/misturnos.html",
+      "icons": [
+        {
+          "src": "/veterinaria/imagenes/icon-calendar.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Mis Mascotas",
+      "short_name": "Mascotas",
+      "description": "Gestionar mis mascotas",
+      "url": "/veterinaria/mascotas.html",
+      "icons": [
+        {
+          "src": "/veterinaria/imagenes/icon-paw.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Pedir Turno",
+      "short_name": "Nuevo Turno",
+      "description": "Solicitar un nuevo turno",
+      "url": "/veterinaria/turnos.html",
+      "icons": [
+        {
+          "src": "/veterinaria/imagenes/icon-add.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "share_target": {
+    "action": "/veterinaria/compartir",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

@@ -2,8 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Clínica Veterinaria - Inicio</title>
+  <title>Clínica Veterinaria - Atención Profesional para tus Mascotas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Clínica veterinaria con atención profesional 24/7. Turnos online, emergencias, consultas y cirugías para tus mascotas.">
+  <meta name="theme-color" content="#ff9800">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="imagenes/logoMascota.png">
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,12 +19,42 @@
 
   <!-- AOS Animation -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="icon" type="image/png" href="imagenes/logoMascota.png" />
+  
+  <!-- Estilos -->
   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/animations.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+  <link rel="stylesheet" href="styles/features.css">
+  <link rel="stylesheet" href="styles/calendar.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="stylesheet" href="styles/chat.css">
+  <link rel="stylesheet" href="styles/skeleton.css">
+  <link rel="stylesheet" href="styles/breadcrumbs.css">
+  <link rel="stylesheet" href="styles/filters.css">
+  <link rel="stylesheet" href="styles/timeline.css">
+  <link rel="stylesheet" href="styles/export.css">
+  <link rel="stylesheet" href="styles/payments.css">
+  <link rel="stylesheet" href="styles/blog.css">
+  <link rel="stylesheet" href="styles/notifications.css">
 </head>
 
 <body style="font-family: 'Poppins', sans-serif;">
+
+  <!-- LOADING SCREEN -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+      <img src="imagenes/logoMascota.png" alt="Logo" class="loading-logo">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Cargando...</p>
+    </div>
+  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
@@ -182,11 +218,261 @@
     </div>
   </footer>
 
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top-btn" id="scrollTopBtn">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/5491123456789" class="whatsapp-float" target="_blank" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
   <!-- Bootstrap & AOS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  
+  <!-- Nuevos Módulos JavaScript -->
+  <script src="js/utils.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/pwa-init.js"></script>
+  
   <script>
-    AOS.init({ duration: 1000, once: true });
+    // ===========================
+    // INICIALIZACIÓN GENERAL
+    // ===========================
+    
+    // AOS Animation
+    AOS.init({ duration: 1000, once: true, easing: 'ease-out-cubic' });
+    
+    // ===========================
+    // LOADING SCREEN
+    // ===========================
+    window.addEventListener('load', () => {
+      const loadingScreen = document.getElementById('loadingScreen');
+      setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+      }, 800);
+    });
+    
+    // ===========================
+    // SCROLL TO TOP
+    // ===========================
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+    
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // ===========================
+    // DARK MODE TOGGLE
+    // ===========================
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    // Check saved preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+    }
+    
+    if (darkModeToggle) {
+      darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        
+        if (document.body.classList.contains('dark-mode')) {
+          localStorage.setItem('darkMode', 'enabled');
+        } else {
+          localStorage.setItem('darkMode', 'disabled');
+        }
+      });
+    }
+    
+    // ===========================
+    // STATISTICS COUNTER
+    // ===========================
+    const counters = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
+    
+    const observerOptions = {
+      threshold: 0.5
+    };
+    
+    const observerCallback = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          counters.forEach(counter => {
+            animateCounter(counter);
+          });
+        }
+      });
+    };
+    
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const statsSection = document.querySelector('#estadisticas');
+    if (statsSection) {
+      observer.observe(statsSection);
+    }
+    
+    function animateCounter(element) {
+      const target = parseInt(element.dataset.target);
+      const duration = 2000;
+      const increment = target / (duration / 16);
+      let current = 0;
+      
+      const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+          element.textContent = Math.floor(current);
+          requestAnimationFrame(updateCounter);
+        } else {
+          element.textContent = target;
+        }
+      };
+      
+      updateCounter();
+    }
+    
+    // ===========================
+    // TESTIMONIALS CAROUSEL
+    // ===========================
+    const testimonialTrack = document.querySelector('.testimonial-track');
+    if (testimonialTrack) {
+      const prevBtn = document.querySelector('.testimonial-prev');
+      const nextBtn = document.querySelector('.testimonial-next');
+      const cards = document.querySelectorAll('.testimonial-card');
+      let currentIndex = 0;
+      
+      function updateCarousel() {
+        const cardWidth = cards[0].offsetWidth + 32; // width + gap
+        testimonialTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+      }
+      
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+          }
+        });
+      }
+      
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          if (currentIndex < cards.length - 1) {
+            currentIndex++;
+            updateCarousel();
+          }
+        });
+      }
+      
+      // Auto-play
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateCarousel();
+      }, 5000);
+    }
+    
+    // ===========================
+    // GALLERY MODAL
+    // ===========================
+    const galleryImages = document.querySelectorAll('.gallery-item img');
+    const modal = document.getElementById('galleryModal');
+    const modalImg = document.getElementById('galleryModalImage');
+    const closeModal = document.querySelector('.gallery-modal-close');
+    
+    galleryImages.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.classList.add('active');
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    if (closeModal) {
+      closeModal.addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+    }
+    
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    }
+    
+    // ===========================
+    // INICIALIZAR CHAT
+    // ===========================
+    const chatSystem = new ChatSystem({
+      currentUser: 'Usuario',
+      botName: 'Asistente Veterinario'
+    });
+    
+    // ===========================
+    // NOTIFICACIONES DE BIENVENIDA
+    // ===========================
+    setTimeout(() => {
+      if (window.notify) {
+        window.notify(
+          '¡Bienvenido!',
+          'Explora nuestros servicios y agenda tu turno online',
+          'info',
+          { duration: 5000 }
+        );
+      }
+    }, 2000);
+    
+    // ===========================
+    // SMOOTH SCROLL
+    // ===========================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+    
+    // ===========================
+    // CONSOLE LOG
+    // ===========================
+    console.log('%c🐾 Clínica Veterinaria v2.0', 'color: #ff9800; font-size: 24px; font-weight: bold;');
+    console.log('%c✨ Sistema completamente actualizado con:', 'color: #4caf50; font-size: 14px;');
+    console.log('  ✅ PWA con Service Worker');
+    console.log('  ✅ Sistema de Chat Inteligente');
+    console.log('  ✅ Calendario Interactivo');
+    console.log('  ✅ Dashboard con Estadísticas');
+    console.log('  ✅ Notificaciones en Tiempo Real');
+    console.log('  ✅ Exportación a PDF');
+    console.log('  ✅ Timeline de Historial');
+    console.log('  ✅ Sistema de Pagos');
+    console.log('  ✅ Blog y Noticias');
+    console.log('  ✅ Filtros Avanzados');
+    console.log('  ✅ Skeleton Loaders');
+    console.log('  ✅ Breadcrumbs de Navegación');
   </script>
 </body>
 </html>

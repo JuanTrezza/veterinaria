@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Clínica Veterinaria</title>
+  
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="stylesheet" href="styles/breadcrumbs.css">
+  <link rel="stylesheet" href="styles/notifications.css">
+  <link rel="icon" href="imagenes/logoMascota.png">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="imagenes/logoMascota.png" alt="Logo" height="45" class="me-2">
+        <span class="fw-bold text-dark">Clínica Veterinaria</span>
+      </a>
+      <div class="ms-auto d-flex gap-2">
+        <button class="btn btn-outline-primary" onclick="notificationSystem.openPanel()">
+          <i class="fas fa-bell"></i>
+          <span class="badge bg-danger">3</span>
+        </button>
+        <a href="index.html" class="btn btn-primary">
+          <i class="fas fa-home"></i> Inicio
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <div class="container mt-3">
+    <div class="breadcrumb-container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-chart-line"></i> Dashboard</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="container dashboard-container">
+    
+    <!-- Header -->
+    <div class="row mb-4">
+      <div class="col">
+        <h1 class="fw-bold"><i class="fas fa-chart-line text-primary"></i> Dashboard</h1>
+        <p class="text-muted">Vista general de estadísticas y actividad</p>
+      </div>
+      <div class="col-auto">
+        <select class="form-select">
+          <option>Últimos 7 días</option>
+          <option>Últimos 30 días</option>
+          <option>Último año</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <a href="turnos.html" class="quick-action-btn">
+        <div class="quick-action-icon">
+          <i class="fas fa-calendar-plus"></i>
+        </div>
+        <div class="quick-action-content">
+          <h5>Nuevo Turno</h5>
+          <p>Agendar cita</p>
+        </div>
+      </a>
+      <a href="mascotas.html" class="quick-action-btn">
+        <div class="quick-action-icon">
+          <i class="fas fa-paw"></i>
+        </div>
+        <div class="quick-action-content">
+          <h5>Mis Mascotas</h5>
+          <p>Ver y gestionar</p>
+        </div>
+      </a>
+      <a href="#" class="quick-action-btn">
+        <div class="quick-action-icon">
+          <i class="fas fa-file-medical"></i>
+        </div>
+        <div class="quick-action-content">
+          <h5>Historial</h5>
+          <p>Consultar registros</p>
+        </div>
+      </a>
+      <a href="#" class="quick-action-btn">
+        <div class="quick-action-icon">
+          <i class="fas fa-credit-card"></i>
+        </div>
+        <div class="quick-action-content">
+          <h5>Pagos</h5>
+          <p>Ver y realizar</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon primary">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="stat-trend up">
+              <i class="fas fa-arrow-up"></i> 12%
+            </div>
+          </div>
+          <div class="stat-content">
+            <h3>Turnos Agendados</h3>
+            <div class="stat-value">24</div>
+            <div class="stat-footer">Este mes</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon success">
+              <i class="fas fa-paw"></i>
+            </div>
+            <div class="stat-trend up">
+              <i class="fas fa-arrow-up"></i> 8%
+            </div>
+          </div>
+          <div class="stat-content">
+            <h3>Mascotas Registradas</h3>
+            <div class="stat-value">5</div>
+            <div class="stat-footer">Total activas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon info">
+              <i class="fas fa-syringe"></i>
+            </div>
+            <div class="stat-trend up">
+              <i class="fas fa-arrow-up"></i> 5%
+            </div>
+          </div>
+          <div class="stat-content">
+            <h3>Vacunas Aplicadas</h3>
+            <div class="stat-value">18</div>
+            <div class="stat-footer">Este año</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon warning">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="stat-trend down">
+              <i class="fas fa-arrow-down"></i> 3%
+            </div>
+          </div>
+          <div class="stat-content">
+            <h3>Gasto Total</h3>
+            <div class="stat-value">$45,250</div>
+            <div class="stat-footer">Este año</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-8">
+        <div class="chart-container">
+          <div class="chart-header">
+            <h4>Turnos por Mes</h4>
+            <div class="chart-filters">
+              <button class="chart-filter-btn active">Mes</button>
+              <button class="chart-filter-btn">Trimestre</button>
+              <button class="chart-filter-btn">Año</button>
+            </div>
+          </div>
+          <div class="chart-body">
+            <canvas id="turnosChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="chart-container">
+          <div class="chart-header">
+            <h4>Tipos de Consulta</h4>
+          </div>
+          <div class="chart-body">
+            <canvas id="consultasChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity Table -->
+    <div class="dashboard-table">
+      <div class="p-3 border-bottom">
+        <h4 class="mb-0"><i class="fas fa-history"></i> Actividad Reciente</h4>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Mascota</th>
+            <th>Tipo</th>
+            <th>Veterinario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>15/12/2024</td>
+            <td><i class="fas fa-dog text-primary"></i> Max</td>
+            <td>Consulta General</td>
+            <td>Dr. González</td>
+            <td><span class="status-badge success">Completado</span></td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></button>
+              <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-download"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>10/12/2024</td>
+            <td><i class="fas fa-cat text-primary"></i> Luna</td>
+            <td>Vacunación</td>
+            <td>Dra. Martínez</td>
+            <td><span class="status-badge success">Completado</span></td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></button>
+              <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-download"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>20/12/2024</td>
+            <td><i class="fas fa-dog text-primary"></i> Max</td>
+            <td>Control</td>
+            <td>Dr. González</td>
+            <td><span class="status-badge warning">Pendiente</span></td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></button>
+              <button class="btn btn-sm btn-outline-danger"><i class="fas fa-times"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/notifications.js"></script>
+  
+  <script>
+    // Turnos Chart
+    const ctxTurnos = document.getElementById('turnosChart').getContext('2d');
+    new Chart(ctxTurnos, {
+      type: 'line',
+      data: {
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        datasets: [{
+          label: 'Turnos',
+          data: [12, 19, 15, 22, 18, 25, 20, 24, 22, 28, 26, 24],
+          borderColor: '#ff9800',
+          backgroundColor: 'rgba(255, 152, 0, 0.1)',
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // Consultas Chart
+    const ctxConsultas = document.getElementById('consultasChart').getContext('2d');
+    new Chart(ctxConsultas, {
+      type: 'doughnut',
+      data: {
+        labels: ['Consulta General', 'Vacunación', 'Cirugía', 'Emergencia'],
+        datasets: [{
+          data: [45, 30, 15, 10],
+          backgroundColor: ['#ff9800', '#4caf50', '#2196f3', '#f44336']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
+
+    // Notificaciones de ejemplo
+    setTimeout(() => {
+      notify('Próximo Turno', 'Tienes una consulta programada para Max el 20/12', 'info');
+    }, 2000);
+  </script>
+</body>
+</html>

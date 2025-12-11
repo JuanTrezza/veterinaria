@@ -1,0 +1,296 @@
+/* ===========================
+   SKELETON LOADERS
+   =========================== */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--light-bg) 0%,
+    #e0e0e0 50%,
+    var(--light-bg) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  animation: skeleton-shimmer 2s infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Skeleton Variants */
+.skeleton-text {
+  height: 16px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.skeleton-text.short {
+  width: 60%;
+}
+
+.skeleton-text.medium {
+  width: 80%;
+}
+
+.skeleton-title {
+  height: 28px;
+  width: 50%;
+  margin-bottom: 16px;
+}
+
+.skeleton-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.skeleton-avatar.large {
+  width: 80px;
+  height: 80px;
+}
+
+.skeleton-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.skeleton-image {
+  height: 200px;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.skeleton-button {
+  height: 40px;
+  width: 120px;
+  border-radius: 8px;
+}
+
+/* Skeleton Card Layout */
+.skeleton-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.skeleton-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Table Skeleton */
+.skeleton-table {
+  width: 100%;
+}
+
+.skeleton-table-row {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.skeleton-table-cell {
+  height: 20px;
+  flex: 1;
+}
+
+/* List Skeleton */
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skeleton-list-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+}
+
+.skeleton-list-item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.skeleton-list-item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Dashboard Skeleton */
+.skeleton-stat-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.skeleton-stat-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.skeleton-stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+}
+
+.skeleton-stat-value {
+  height: 40px;
+  width: 80px;
+  margin-bottom: 0.5rem;
+}
+
+/* Calendar Skeleton */
+.skeleton-calendar {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.skeleton-calendar-header {
+  height: 40px;
+  margin-bottom: 1rem;
+}
+
+.skeleton-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.skeleton-calendar-day {
+  aspect-ratio: 1;
+  border-radius: 8px;
+}
+
+/* Form Skeleton */
+.skeleton-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skeleton-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeleton-label {
+  height: 16px;
+  width: 100px;
+}
+
+.skeleton-input {
+  height: 42px;
+  border-radius: 8px;
+}
+
+.skeleton-textarea {
+  height: 100px;
+  border-radius: 8px;
+}
+
+/* Chart Skeleton */
+.skeleton-chart {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.skeleton-chart-header {
+  height: 24px;
+  width: 150px;
+  margin-bottom: 1.5rem;
+}
+
+.skeleton-chart-body {
+  height: 300px;
+  border-radius: 12px;
+}
+
+/* Profile Skeleton */
+.skeleton-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.skeleton-profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.skeleton-profile-name {
+  height: 24px;
+  width: 200px;
+}
+
+.skeleton-profile-info {
+  height: 16px;
+  width: 150px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skeleton-image {
+    height: 150px;
+  }
+  
+  .skeleton-chart-body {
+    height: 200px;
+  }
+}
