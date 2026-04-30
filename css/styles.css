@@ -170,6 +170,7 @@ section { padding-block: var(--section-py); }
   cursor: pointer;
   transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
   border: none;
+  margin-left: 28px;
 }
 
 .btn-nav-login {
