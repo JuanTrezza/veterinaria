@@ -1,486 +1,175 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Clínica Veterinaria - Atención Profesional para tus Mascotas</title>
+  <title>Clínica Veterinaria — Atención Profesional para tus Mascotas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Clínica veterinaria con atención profesional 24/7. Turnos online, emergencias, consultas y cirugías para tus mascotas.">
-  <meta name="theme-color" content="#ff9800">
-  
-  <!-- PWA Manifest -->
+  <meta name="description" content="Clínica veterinaria con atención profesional. Turnos online, consultas y cirugías para tus mascotas.">
+  <meta name="theme-color" content="#1B4332">
   <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="imagenes/logoMascota.png" type="image/png">
   <link rel="apple-touch-icon" href="imagenes/logoMascota.png">
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(155deg, var(--color-primary) 0%, var(--color-primary-dark) 60%, #0D2218 100%);
+      color: var(--color-white);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('imagenes/hero-1.jpg') center/cover no-repeat;
+      opacity: .18;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(82,183,136,.25);
+      color: var(--color-accent-light);
+      border: 1px solid rgba(82,183,136,.4);
+      padding: 6px 18px;
+      border-radius: var(--radius-xl);
+      font-size: .9rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .hero h1 { color: var(--color-white); margin-bottom: 20px; }
+    .hero p { color: rgba(255,255,255,.8); font-size: 1.15rem; margin-bottom: 36px; }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hidden { display: none !important; }
 
-  <!-- AOS Animation -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    .servicios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; margin-top: 48px; }
+    .servicio-card { text-align: center; padding: 40px 24px; border-radius: var(--radius-lg); background: var(--color-white); box-shadow: var(--shadow-sm); transition: transform var(--transition), box-shadow var(--transition); }
+    .servicio-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .servicio-icon { font-size: 3rem; margin-bottom: 16px; display: block; }
+    .servicio-card h3 { margin-bottom: 10px; }
+    .servicio-card p  { font-size: .95rem; margin-bottom: 16px; }
+    .servicio-link { color: var(--color-accent); font-weight: 700; font-size: .95rem; }
+    .servicio-link:hover { color: var(--color-primary); }
 
-  <link rel="icon" type="image/png" href="imagenes/logoMascota.png" />
-  
-  <!-- Estilos -->
-  <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="styles/global.css">
-  <link rel="stylesheet" href="styles/animations.css">
-  <link rel="stylesheet" href="styles/responsive.css">
-  <link rel="stylesheet" href="styles/features.css">
-  <link rel="stylesheet" href="styles/calendar.css">
-  <link rel="stylesheet" href="styles/dashboard.css">
-  <link rel="stylesheet" href="styles/chat.css">
-  <link rel="stylesheet" href="styles/skeleton.css">
-  <link rel="stylesheet" href="styles/breadcrumbs.css">
-  <link rel="stylesheet" href="styles/filters.css">
-  <link rel="stylesheet" href="styles/timeline.css">
-  <link rel="stylesheet" href="styles/export.css">
-  <link rel="stylesheet" href="styles/payments.css">
-  <link rel="stylesheet" href="styles/blog.css">
-  <link rel="stylesheet" href="styles/notifications.css">
+    .stats-section { background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: var(--color-white); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 40px; text-align: center; }
+    .stat-item h2 { color: var(--color-accent-light); font-size: 2.8rem; font-weight: 700; margin-bottom: 6px; }
+    .stat-item p { color: rgba(255,255,255,.75); font-size: 1rem; }
+
+    .razones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 48px; }
+    .razon-card { padding: 32px 24px; border-radius: var(--radius-lg); background: var(--color-bg-alt); border-left: 4px solid var(--color-accent); }
+    .razon-card h3 { margin-bottom: 10px; }
+
+    .contacto-section { background: var(--color-bg-alt); }
+    .contacto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .contacto-data li { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 24px; }
+    .contacto-data .icon-wrap { width: 44px; height: 44px; min-width: 44px; background: var(--color-white); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-accent); font-size: 1.1rem; border: 2px solid var(--color-accent); }
+    .contacto-data ul { list-style: none; }
+    .contacto-data strong { color: var(--color-primary); display: block; margin-bottom: 2px; }
+
+    @media (max-width: 768px) {
+      .contacto-grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding: 100px 0 60px; }
+    }
+  </style>
 </head>
+<body>
+  <div id="navbar-placeholder"></div>
 
-<body style="font-family: 'Poppins', sans-serif;">
-
-  <!-- LOADING SCREEN -->
-  <div id="loadingScreen" class="loading-screen">
-    <div class="loading-content">
-      <img src="imagenes/logoMascota.png" alt="Logo" class="loading-logo">
-      <div class="loading-spinner"></div>
-      <p class="loading-text">Cargando...</p>
-    </div>
-  </div>
-
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <section class="hero">
+    <div class="hero-bg"></div>
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="imagenes/logoMascota.png" alt="Logo Clínica" class="me-2" height="45">
-        <span class="fw-bold text-dark">Clínica Veterinaria</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link text-dark" href="#">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="mascotas.html">Mascotas</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">Turnos</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="misturnos.html">Ver mis turnos</a></li>
-              <li><a class="dropdown-item" href="turnos.html">Pedir turnos</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link text-dark" href="micuenta.html">Mi cuenta</a></li>
-          <li class="nav-item"><a id="authLink" class="btn btn-warning text-white ms-lg-3" href="login.html">Iniciar sesión</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO / CARRUSEL -->
-  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="imagenes/hero-1.jpg" class="d-block w-100" alt="Consulta veterinaria" style="height:500px; object-fit:cover;">
-        <div class="carousel-caption d-none d-md-block" data-aos="fade-up">
-          <h1 class="fw-bold">Cuidado experto y cercano</h1>
-          <p>Profesionales que aman lo que hacen.</p>
-          <a href="turnos.html" class="btn btn-warning text-white">Reservar Turno</a>
+      <div class="hero-content">
+        <div class="hero-label"><i class="fa fa-shield-heart"></i> Atención veterinaria de confianza</div>
+        <h1 id="heroBienvenida">Tu mascota merece lo mejor</h1>
+        <p>Brindamos cuidado profesional, cercano y con amor. Turnos online, atención personalizada y el equipo que tu compañero necesita.</p>
+        <div class="hero-ctas" id="heroCtaSesion" style="display:none">
+          <a href="turnos.html" class="btn btn-primary"><i class="fa fa-calendar-plus"></i> Ver mis turnos</a>
+          <a href="mascotas.html" class="btn btn-outline" style="border-color:rgba(255,255,255,.5);color:#fff;">Mis mascotas</a>
         </div>
-      </div>
-      <div class="carousel-item">
-        <img src="imagenes/imagen4.jpg" class="d-block w-100" alt="Vacunación" style="height:500px; object-fit:cover;">
-        <div class="carousel-caption d-none d-md-block" data-aos="fade-up">
-          <h1 class="fw-bold">Vacunación y prevención</h1>
-          <p>Protegemos a tu mascota en cada etapa.</p>
-          <a href="#servicios" class="btn btn-outline-light">Ver Servicios</a>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="imagenes/imagen2.jpg" class="d-block w-100" alt="Laboratorio veterinario" style="height:500px; object-fit:cover;">
-        <div class="carousel-caption d-none d-md-block" data-aos="fade-up">
-          <h1 class="fw-bold">Diagnóstico por laboratorio</h1>
-          <p>Resultados rápidos y precisos.</p>
-          <a href="#informacion" class="btn btn-warning text-white">Más información</a>
+        <div class="hero-ctas" id="heroCtaPublico">
+          <a href="login.html" class="btn btn-primary"><i class="fa fa-calendar-plus"></i> Reservar turno</a>
+          <a href="#servicios" class="btn btn-outline" style="border-color:rgba(255,255,255,.5);color:#fff;">Ver servicios</a>
         </div>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
-  </div>
+  </section>
 
-  <!-- SERVICIOS -->
-  <section id="servicios" class="py-5 bg-white">
-    <div class="container text-center">
-      <h2 class="fw-bold mb-4" data-aos="fade-up">Nuestros Servicios</h2>
-      <p class="text-muted mb-5" data-aos="fade-up">Cuidado integral para perros y gatos</p>
-      <div class="row g-4">
-        <div class="col-md-4" data-aos="zoom-in">
-          <div class="card border-0 shadow-sm h-100">
-            <img src="imagenes/hero-4.jpg" class="card-img-top" alt="Consultas">
-            <div class="card-body">
-              <h5 class="card-title">Consultas y Chequeos</h5>
-              <p class="card-text">Atención veterinaria general y personalizada para tu mascota.</p>
-            </div>
-          </div>
+  <section id="servicios">
+    <div class="container">
+      <div class="fade-in" style="text-align:center;margin-bottom:8px">
+        <h2>Nuestros Servicios</h2>
+        <p>Todo lo que tu mascota necesita, en un solo lugar.</p>
+      </div>
+      <div class="servicios-grid">
+        <div class="servicio-card fade-in"><span class="servicio-icon">🩺</span><h3>Consulta General</h3><p>Revisión completa con profesionales especializados para el bienestar de tu mascota.</p><a href="login.html" class="servicio-link">Reservar →</a></div>
+        <div class="servicio-card fade-in"><span class="servicio-icon">💉</span><h3>Vacunación</h3><p>Plan de vacunación completo y control de refuerzos para mantenerla protegida.</p><a href="login.html" class="servicio-link">Reservar →</a></div>
+        <div class="servicio-card fade-in"><span class="servicio-icon">🔬</span><h3>Laboratorio</h3><p>Análisis de sangre, orina y más para diagnósticos precisos y rápidos.</p><a href="login.html" class="servicio-link">Consultar →</a></div>
+        <div class="servicio-card fade-in"><span class="servicio-icon">🏥</span><h3>Cirugías</h3><p>Intervenciones quirúrgicas con equipamiento moderno y equipo calificado.</p><a href="login.html" class="servicio-link">Consultar →</a></div>
+        <div class="servicio-card fade-in"><span class="servicio-icon">🛁</span><h3>Peluquería</h3><p>Baño, corte y estética para que tu mascota siempre luzca increíble.</p><a href="login.html" class="servicio-link">Reservar →</a></div>
+        <div class="servicio-card fade-in"><span class="servicio-icon">🦷</span><h3>Odontología</h3><p>Limpieza dental y cuidado bucal profesional para su salud integral.</p><a href="login.html" class="servicio-link">Consultar →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item fade-in"><h2><span data-counter="500" data-suffix="+">0</span></h2><p>Pacientes atendidos</p></div>
+        <div class="stat-item fade-in"><h2><span data-counter="10" data-suffix=" años">0</span></h2><p>De experiencia</p></div>
+        <div class="stat-item fade-in"><h2><span data-counter="15" data-suffix="+">0</span></h2><p>Profesionales</p></div>
+        <div class="stat-item fade-in"><h2><span data-counter="98" data-suffix="%">0</span></h2><p>Clientes satisfechos</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="fade-in" style="text-align:center">
+        <h2>¿Por qué elegirnos?</h2>
+        <p>Nos diferenciamos por nuestra dedicación y cuidado integral.</p>
+      </div>
+      <div class="razones-grid">
+        <div class="razon-card fade-in"><h3><i class="fa fa-heart" style="color:var(--color-accent);margin-right:8px"></i>Atención personalizada</h3><p>Cada mascota es única. Adaptamos el cuidado a sus necesidades específicas.</p></div>
+        <div class="razon-card fade-in"><h3><i class="fa fa-clock" style="color:var(--color-accent);margin-right:8px"></i>Turnos online 24/7</h3><p>Reservá cuando quieras, desde cualquier dispositivo, sin esperas.</p></div>
+        <div class="razon-card fade-in"><h3><i class="fa fa-user-md" style="color:var(--color-accent);margin-right:8px"></i>Equipo calificado</h3><p>Veterinarios con posgrados y capacitación continua para el mejor diagnóstico.</p></div>
+        <div class="razon-card fade-in"><h3><i class="fa fa-microscope" style="color:var(--color-accent);margin-right:8px"></i>Tecnología moderna</h3><p>Equipamiento de última generación para diagnósticos precisos y seguros.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacto-section">
+    <div class="container">
+      <div class="contacto-grid">
+        <div class="fade-in">
+          <h2>Encontranos</h2>
+          <p>Estamos ubicados en el corazón de la ciudad, listos para atenderte.</p>
+          <ul class="contacto-data">
+            <li><div class="icon-wrap"><i class="fa fa-map-marker-alt"></i></div><div><strong>Dirección</strong>Av. Principal 1234, Buenos Aires</div></li>
+            <li><div class="icon-wrap"><i class="fa fa-phone"></i></div><div><strong>Teléfono</strong><a href="tel:+541112345678">+54 11 1234-5678</a></div></li>
+            <li><div class="icon-wrap"><i class="fa fa-envelope"></i></div><div><strong>Email</strong><a href="mailto:info@veterinaria.com">info@veterinaria.com</a></div></li>
+            <li><div class="icon-wrap"><i class="fa fa-clock"></i></div><div><strong>Horarios</strong>Lunes a Viernes: 9:00 – 18:00 hs</div></li>
+          </ul>
         </div>
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
-          <div class="card border-0 shadow-sm h-100">
-            <img src="imagenes/imagen3.jpg" class="card-img-top" alt="Vacunación">
-            <div class="card-body">
-              <h5 class="card-title">Vacunación</h5>
-              <p class="card-text">Calendario completo y productos de primera calidad.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-          <div class="card border-0 shadow-sm h-100">
-            <img src="imagenes/imagen5.jpg" class="card-img-top" alt="Laboratorio">
-            <div class="card-body">
-              <h5 class="card-title">Laboratorio Clínico</h5>
-              <p class="card-text">Análisis rápidos y confiables para diagnósticos precisos.</p>
-            </div>
+        <div class="fade-in" style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);min-height:300px;background:var(--color-white);display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;padding:40px;color:var(--color-text-muted)">
+            <i class="fa fa-map" style="font-size:3rem;color:var(--color-accent);margin-bottom:12px;display:block"></i>
+            <p>Av. Principal 1234<br>Buenos Aires, Argentina</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- INFORMACIÓN ÚTIL -->
-  <section id="informacion" class="py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="fw-bold mb-4" data-aos="fade-up">Información Útil</h2>
-      <p class="text-muted mb-5" data-aos="fade-up">Indicaciones, coberturas y preguntas frecuentes</p>
-      <div class="row g-4 justify-content-center">
-        <div class="col-md-3" data-aos="zoom-in">
-          <div class="card shadow-sm border-0 p-4 h-100">
-            <i class="fa-solid fa-notes-medical fa-2x text-warning mb-3"></i>
-            <h5>Indicaciones</h5>
-            <p>Consejos previos a estudios y atención veterinaria.</p>
-            <a href="#" class="btn btn-outline-warning btn-sm mt-2">Leer más</a>
-          </div>
-        </div>
-        <div class="col-md-3" data-aos="zoom-in" data-aos-delay="150">
-          <div class="card shadow-sm border-0 p-4 h-100">
-            <i class="fa-solid fa-shield-dog fa-2x text-warning mb-3"></i>
-            <h5>Coberturas</h5>
-            <p>Planes y beneficios para tus mascotas.</p>
-            <a href="#" class="btn btn-outline-warning btn-sm mt-2">Ver coberturas</a>
-          </div>
-        </div>
-        <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
-          <div class="card shadow-sm border-0 p-4 h-100">
-            <i class="fa-solid fa-circle-question fa-2x text-warning mb-3"></i>
-            <h5>Preguntas Frecuentes</h5>
-            <p>Resolvé tus dudas sobre turnos, vacunas y servicios.</p>
-            <a href="#" class="btn btn-outline-warning btn-sm mt-2">Ver preguntas</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div id="footer-placeholder"></div>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-light py-4">
-    <div class="container">
-      <div class="row text-center text-md-start">
-        <div class="col-md-4 mb-4 mb-md-0">
-          <h5 class="text-warning">Clínica Veterinaria</h5>
-          <p>Atención cálida, profesional y cercana. Cuidamos a tu mascota como parte de nuestra familia.</p>
-        </div>
-        <div class="col-md-4 mb-4 mb-md-0">
-          <h5 class="text-warning">Contacto</h5>
-          <p><i class="fa-solid fa-phone me-2"></i> +54 11 1234-5678</p>
-          <p><i class="fa-solid fa-envelope me-2"></i> info@veterinaria.com</p>
-          <p><i class="fa-solid fa-location-dot me-2"></i> Av. Principal 1234, Buenos Aires</p>
-        </div>
-        <div class="col-md-4">
-          <h5 class="text-warning">Redes</h5>
-          <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
-          <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
-          <a href="#" class="text-light"><i class="fab fa-whatsapp fa-lg"></i></a>
-        </div>
-      </div>
-      <hr class="border-secondary mt-4">
-      <p class="text-center mb-0">© 2025 Clínica Veterinaria — Todos los derechos reservados.</p>
-    </div>
-  </footer>
-
-  <!-- Scroll to Top Button -->
-  <button class="scroll-top-btn" id="scrollTopBtn">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <!-- WhatsApp Float Button -->
-  <a href="https://wa.me/5491123456789" class="whatsapp-float" target="_blank" rel="noopener">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <!-- Bootstrap & AOS Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  
-  <!-- Nuevos Módulos JavaScript -->
-  <script src="js/utils.js"></script>
-  <script src="js/calendar.js"></script>
-  <script src="js/chat.js"></script>
-  <script src="js/notifications.js"></script>
-  <script src="js/pwa-init.js"></script>
-  
-  <script>
-    // ===========================
-    // INICIALIZACIÓN GENERAL
-    // ===========================
-    
-    // AOS Animation
-    AOS.init({ duration: 1000, once: true, easing: 'ease-out-cubic' });
-    
-    // ===========================
-    // LOADING SCREEN
-    // ===========================
-    window.addEventListener('load', () => {
-      const loadingScreen = document.getElementById('loadingScreen');
-      setTimeout(() => {
-        loadingScreen.classList.add('hidden');
-      }, 800);
-    });
-    
-    // ===========================
-    // SCROLL TO TOP
-    // ===========================
-    const scrollTopBtn = document.getElementById('scrollTopBtn');
-    
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        scrollTopBtn.classList.add('visible');
-      } else {
-        scrollTopBtn.classList.remove('visible');
-      }
-    });
-    
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-    
-    // ===========================
-    // DARK MODE TOGGLE
-    // ===========================
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    
-    // Check saved preference
-    if (localStorage.getItem('darkMode') === 'enabled') {
-      document.body.classList.add('dark-mode');
-    }
-    
-    if (darkModeToggle) {
-      darkModeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        
-        if (document.body.classList.contains('dark-mode')) {
-          localStorage.setItem('darkMode', 'enabled');
-        } else {
-          localStorage.setItem('darkMode', 'disabled');
-        }
-      });
-    }
-    
-    // ===========================
-    // STATISTICS COUNTER
-    // ===========================
-    const counters = document.querySelectorAll('.stat-number');
-    let hasAnimated = false;
-    
-    const observerOptions = {
-      threshold: 0.5
-    };
-    
-    const observerCallback = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !hasAnimated) {
-          hasAnimated = true;
-          counters.forEach(counter => {
-            animateCounter(counter);
-          });
-        }
-      });
-    };
-    
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const statsSection = document.querySelector('#estadisticas');
-    if (statsSection) {
-      observer.observe(statsSection);
-    }
-    
-    function animateCounter(element) {
-      const target = parseInt(element.dataset.target);
-      const duration = 2000;
-      const increment = target / (duration / 16);
-      let current = 0;
-      
-      const updateCounter = () => {
-        current += increment;
-        if (current < target) {
-          element.textContent = Math.floor(current);
-          requestAnimationFrame(updateCounter);
-        } else {
-          element.textContent = target;
-        }
-      };
-      
-      updateCounter();
-    }
-    
-    // ===========================
-    // TESTIMONIALS CAROUSEL
-    // ===========================
-    const testimonialTrack = document.querySelector('.testimonial-track');
-    if (testimonialTrack) {
-      const prevBtn = document.querySelector('.testimonial-prev');
-      const nextBtn = document.querySelector('.testimonial-next');
-      const cards = document.querySelectorAll('.testimonial-card');
-      let currentIndex = 0;
-      
-      function updateCarousel() {
-        const cardWidth = cards[0].offsetWidth + 32; // width + gap
-        testimonialTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-      }
-      
-      if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-          if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-          }
-        });
-      }
-      
-      if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-          if (currentIndex < cards.length - 1) {
-            currentIndex++;
-            updateCarousel();
-          }
-        });
-      }
-      
-      // Auto-play
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % cards.length;
-        updateCarousel();
-      }, 5000);
-    }
-    
-    // ===========================
-    // GALLERY MODAL
-    // ===========================
-    const galleryImages = document.querySelectorAll('.gallery-item img');
-    const modal = document.getElementById('galleryModal');
-    const modalImg = document.getElementById('galleryModalImage');
-    const closeModal = document.querySelector('.gallery-modal-close');
-    
-    galleryImages.forEach(img => {
-      img.addEventListener('click', () => {
-        modal.classList.add('active');
-        modalImg.src = img.src;
-        modalImg.alt = img.alt;
-        document.body.style.overflow = 'hidden';
-      });
-    });
-    
-    if (closeModal) {
-      closeModal.addEventListener('click', () => {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      });
-    }
-    
-    if (modal) {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.classList.remove('active');
-          document.body.style.overflow = 'auto';
-        }
-      });
-    }
-    
-    // ===========================
-    // INICIALIZAR CHAT
-    // ===========================
-    const chatSystem = new ChatSystem({
-      currentUser: 'Usuario',
-      botName: 'Asistente Veterinario'
-    });
-    
-    // ===========================
-    // NOTIFICACIONES DE BIENVENIDA
-    // ===========================
-    setTimeout(() => {
-      if (window.notify) {
-        window.notify(
-          '¡Bienvenido!',
-          'Explora nuestros servicios y agenda tu turno online',
-          'info',
-          { duration: 5000 }
-        );
-      }
-    }, 2000);
-    
-    // ===========================
-    // SMOOTH SCROLL
-    // ===========================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-    
-    // ===========================
-    // CONSOLE LOG
-    // ===========================
-    console.log('%c🐾 Clínica Veterinaria v2.0', 'color: #ff9800; font-size: 24px; font-weight: bold;');
-    console.log('%c✨ Sistema completamente actualizado con:', 'color: #4caf50; font-size: 14px;');
-    console.log('  ✅ PWA con Service Worker');
-    console.log('  ✅ Sistema de Chat Inteligente');
-    console.log('  ✅ Calendario Interactivo');
-    console.log('  ✅ Dashboard con Estadísticas');
-    console.log('  ✅ Notificaciones en Tiempo Real');
-    console.log('  ✅ Exportación a PDF');
-    console.log('  ✅ Timeline de Historial');
-    console.log('  ✅ Sistema de Pagos');
-    console.log('  ✅ Blog y Noticias');
-    console.log('  ✅ Filtros Avanzados');
-    console.log('  ✅ Skeleton Loaders');
-    console.log('  ✅ Breadcrumbs de Navegación');
-  </script>
+  <script src="js/auth.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-

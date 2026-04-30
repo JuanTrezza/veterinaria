@@ -1,137 +1,140 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Clínica Veterinaria — Mi Cuenta</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <!-- AOS -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
   <link rel="icon" href="imagenes/logoMascota.png" type="image/png">
-  <link rel="stylesheet" href="micuenta.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .cuenta-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .stats-cuenta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .stat-cuenta {
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-cuenta .num {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      display: block;
+    }
+    .stat-cuenta .lbl { font-size: .9rem; color: var(--color-text-muted); }
+
+    .perfil-avatar {
+      width: 80px; height: 80px;
+      background: var(--color-bg-alt);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      border: 3px solid var(--color-accent);
+    }
+    .perfil-email { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); margin-bottom: 6px; }
+    .perfil-fecha { color: var(--color-text-muted); font-size: .95rem; }
+
+    @media (max-width: 768px) {
+      .cuenta-layout { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+<body>
+  <div id="navbar-placeholder"></div>
 
-<body style="font-family:'Poppins',sans-serif;">
+  <div class="page-header">
+    <h1>👤 Mi Cuenta</h1>
+    <p>Información de tu perfil y configuración de cuenta.</p>
+  </div>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="imagenes/logoMascota.png" alt="Logo Clínica" height="45" class="me-2">
-        <span class="fw-bold text-dark">Clínica Veterinaria</span>
-      </a>
-      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link text-dark" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="mascotas.html">Mascotas</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">Turnos</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="turnos.html">Pedir turno</a></li>
-              <li><a class="dropdown-item" href="misturnos.html">Mis turnos</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link text-dark active" href="micuenta.html">Mi cuenta</a></li>
-          <li class="nav-item"><a id="logoutBtn" class="btn btn-danger text-white ms-lg-3" href="#">Cerrar sesión</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <section>
+    <div class="container" style="max-width:900px">
+      <div class="cuenta-layout">
 
-  <!-- HEADER -->
-  <header class="py-5 text-center bg-light" data-aos="fade-down">
-    <div class="container">
-      <h1 class="fw-bold text-warning mb-3">Mi Cuenta</h1>
-      <p class="text-muted">Información de tu perfil de usuario.</p>
-    </div>
-  </header>
+        <!-- Perfil -->
+        <div class="card fade-in">
+          <div class="card-body">
+            <div class="perfil-avatar">👤</div>
+            <div class="perfil-email" id="cuentaEmail">—</div>
+            <div class="perfil-fecha">Registrado el: <strong id="cuentaFecha">—</strong></div>
 
-  <!-- PERFIL -->
-  <section id="perfil" class="py-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6" data-aos="zoom-in">
-          <div class="card border-0 shadow-sm p-4 text-center">
-            <i class="fa-solid fa-user-circle fa-4x text-warning mb-3"></i>
-            <h4 class="fw-bold mb-3" id="usuarioEmail">Usuario</h4>
-            <p><strong>Tipo:</strong> <span id="usuarioTipo" class="badge bg-secondary text-capitalize">Usuario</span></p>
-            <p><strong>Registrado el:</strong> <span id="usuarioFecha">---</span></p>
+            <div class="stats-cuenta">
+              <div class="stat-cuenta">
+                <span class="num" id="cuentaMascotas">0</span>
+                <span class="lbl">Mascotas</span>
+              </div>
+              <div class="stat-cuenta">
+                <span class="num" id="cuentaTurnos">0</span>
+                <span class="lbl">Turnos</span>
+              </div>
+            </div>
+
+            <button class="btn btn-danger-custom btn-full" id="btnCerrarSesion" style="margin-top:24px">
+              <i class="fa fa-sign-out-alt"></i> Cerrar sesión
+            </button>
           </div>
         </div>
+
+        <!-- Cambiar contraseña -->
+        <div class="card fade-in">
+          <div class="card-body">
+            <h3 style="margin-bottom:24px"><i class="fa fa-key" style="color:var(--color-accent);margin-right:8px"></i>Cambiar contraseña</h3>
+            <form id="formCambiarPass" novalidate>
+              <div class="form-group">
+                <label for="passActual">Contraseña actual</label>
+                <div class="input-wrapper">
+                  <i class="fa fa-lock input-icon"></i>
+                  <input class="form-control" type="password" id="passActual" placeholder="Tu contraseña actual" required style="padding-right:44px">
+                  <button type="button" class="toggle-pass" data-target="passActual"><i class="fa fa-eye"></i></button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="passNueva">Nueva contraseña</label>
+                <div class="input-wrapper">
+                  <i class="fa fa-lock input-icon"></i>
+                  <input class="form-control" type="password" id="passNueva" placeholder="Mínimo 6 caracteres" required style="padding-right:44px">
+                  <button type="button" class="toggle-pass" data-target="passNueva"><i class="fa fa-eye"></i></button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="passConfirmar">Confirmar nueva contraseña</label>
+                <div class="input-wrapper">
+                  <i class="fa fa-lock input-icon"></i>
+                  <input class="form-control" type="password" id="passConfirmar" placeholder="Repetí la nueva contraseña" required style="padding-right:44px">
+                  <button type="button" class="toggle-pass" data-target="passConfirmar"><i class="fa fa-eye"></i></button>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full">
+                <i class="fa fa-save"></i> Actualizar contraseña
+              </button>
+            </form>
+            <div id="cambiarPassMsg" style="margin-top:14px"></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-light py-4 mt-5">
-    <div class="container text-center">
-      <p class="mb-1">© 2025 Clínica Veterinaria — Todos los derechos reservados.</p>
-      <small>Av. Principal 1234, Buenos Aires • info@veterinaria.com</small>
-    </div>
-  </footer>
-
-  <!-- Bootstrap & AOS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init({ duration:1000, once:true });</script>
-
-  <!-- JS FUNCIONAL -->
-  <script>
-    const API = "http://localhost/veterinaria/api";
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      alert("Debes iniciar sesión para ver tu cuenta.");
-      window.location.href = "login.html";
-    }
-
-    // 🔹 Cargar datos de usuario desde el backend
-    async function cargarPerfil() {
-      try {
-        const res = await fetch(`${API}/usuarios/perfil`, {
-          headers: { "Authorization": `Bearer ${token}` }
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-          alert("Error al obtener los datos del usuario.");
-          console.error(data);
-          return;
-        }
-
-        document.getElementById("usuarioEmail").textContent = data.email || "Usuario";
-        document.getElementById("usuarioTipo").textContent = data.tipo || "usuario";
-        document.getElementById("usuarioFecha").textContent = data.fecha_registro ? new Date(data.fecha_registro).toLocaleDateString() : "No disponible";
-
-        // Cambiar color según tipo
-        const tipoEl = document.getElementById("usuarioTipo");
-        tipoEl.classList.remove("bg-secondary");
-        tipoEl.classList.add(data.tipo === "admin" ? "bg-danger" : "bg-success");
-
-      } catch (err) {
-        console.error("Error al cargar perfil:", err);
-      }
-    }
-
-    // 🔹 Cerrar sesión
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      if (confirm("¿Seguro que querés cerrar sesión?")) {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
-    });
-
-    cargarPerfil();
-  </script>
+  <div id="footer-placeholder"></div>
+  <script src="js/auth.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

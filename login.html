@@ -1,217 +1,138 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Clínica Veterinaria — Iniciar sesión</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- AOS -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="imagenes/logoMascota.png" type="image/png">
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 60px;
+      background: linear-gradient(155deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    }
+    .login-box {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+    }
+    .login-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--color-border);
+    }
+    .login-tab {
+      flex: 1;
+      padding: 18px 24px;
+      border: none;
+      background: none;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: color var(--transition), border-bottom var(--transition);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+    .login-tab.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-accent);
+    }
+    .login-panel { padding: 36px 40px 40px; }
+    .login-panel.hidden { display: none; }
+    .login-panel h2 { margin-bottom: 24px; }
+
+    @media (max-width: 480px) {
+      .login-panel { padding: 28px 20px 32px; }
+    }
+  </style>
 </head>
-<body class="bg-light" style="font-family:'Poppins',sans-serif">
+<body>
+  <div id="navbar-placeholder"></div>
 
-  <!-- NAVBAR (coherente con el resto) -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="imagenes/logoMascota.png" alt="Logo" height="45" class="me-2">
-        <span class="fw-bold text-dark">Clínica Veterinaria</span>
-      </a>
-      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link text-dark" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="mascotas.html">Mascotas</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">Turnos</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="misturnos.html">Mis turnos</a></li>
-              <li><a class="dropdown-item" href="turnos.html">Pedir turno</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link text-dark" href="micuenta.html">Mi cuenta</a></li>
-          <li class="nav-item"><a class="btn btn-warning text-white ms-lg-3" href="login.html">Iniciar sesión</a></li>
-        </ul>
+  <div class="login-wrapper">
+    <div class="login-box">
+      <div class="login-tabs">
+        <button class="login-tab active" id="tabLogin"><i class="fa fa-sign-in-alt" style="margin-right:6px"></i>Iniciar sesión</button>
+        <button class="login-tab" id="tabRegistro"><i class="fa fa-user-plus" style="margin-right:6px"></i>Registrarme</button>
       </div>
-    </div>
-  </nav>
 
-  <!-- HEADER -->
-  <header class="py-5 text-center bg-white border-bottom">
-    <div class="container">
-      <h1 class="fw-bold text-warning mb-2" data-aos="fade-up">Accedé a tu cuenta</h1>
-      <p class="text-muted" data-aos="fade-up" data-aos-delay="100">Iniciá sesión o registrate para gestionar mascotas y turnos.</p>
-    </div>
-  </header>
-
-  <!-- CONTENIDO -->
-  <main class="py-5">
-    <div class="container">
-      <div class="row g-4 justify-content-center">
-        <!-- LOGIN -->
-        <div class="col-lg-5" data-aos="zoom-in">
-          <div class="card border-0 shadow-sm">
-            <div class="card-body p-4">
-              <h4 class="mb-3"><i class="fa-solid fa-right-to-bracket me-2 text-success"></i>Iniciar sesión</h4>
-              <form id="formLogin">
-                <div class="mb-3">
-                  <label class="form-label">Email</label>
-                  <input id="loginEmail" type="email" class="form-control" placeholder="usuario@mail.com" required>
-                </div>
-                <div class="mb-3 position-relative">
-                  <label class="form-label">Contraseña</label>
-                  <input id="loginPass" type="password" class="form-control" placeholder="********" required>
-                  <button type="button" class="btn-eye" onclick="togglePass('loginPass')">
-                    <i class="fa-regular fa-eye"></i>
-                  </button>
-                </div>
-                <button class="btn btn-success w-100" type="submit">Ingresar</button>
-              </form>
-              <div id="loginMsg" class="small mt-3"></div>
+      <!-- Panel Login -->
+      <div class="login-panel" id="panelLogin">
+        <h2>Bienvenido de nuevo</h2>
+        <form id="formLogin" novalidate>
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <div class="input-wrapper">
+              <i class="fa fa-envelope input-icon"></i>
+              <input class="form-control" type="email" id="loginEmail" placeholder="usuario@mail.com" required>
             </div>
           </div>
-        </div>
-
-        <!-- REGISTRO -->
-        <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="150">
-          <div class="card border-0 shadow-sm">
-            <div class="card-body p-4">
-              <h4 class="mb-3"><i class="fa-solid fa-user-plus me-2 text-warning"></i>Registrarme</h4>
-              <form id="formRegistro">
-                <div class="mb-3">
-                  <label class="form-label">Email</label>
-                  <input id="regEmail" type="email" class="form-control" placeholder="usuario@mail.com" required>
-                </div>
-                <div class="mb-3 position-relative">
-                  <label class="form-label">Contraseña</label>
-                  <input id="regPass" type="password" class="form-control" placeholder="Mínimo 6 caracteres" minlength="6" required>
-                  <button type="button" class="btn-eye" onclick="togglePass('regPass')">
-                    <i class="fa-regular fa-eye"></i>
-                  </button>
-                </div>
-                <button class="btn btn-warning w-100 text-white" type="submit">Crear cuenta</button>
-              </form>
-              <div id="regMsg" class="small mt-3"></div>
+          <div class="form-group">
+            <label for="loginPass">Contraseña</label>
+            <div class="input-wrapper">
+              <i class="fa fa-lock input-icon"></i>
+              <input class="form-control" type="password" id="loginPass" placeholder="Tu contraseña" required style="padding-right:44px">
+              <button type="button" class="toggle-pass" data-target="loginPass"><i class="fa fa-eye"></i></button>
             </div>
           </div>
-        </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            <span class="spinner"></span>
+            <span class="btn-text">Ingresar</span>
+          </button>
+        </form>
+        <div id="loginMsg" style="margin-top:14px"></div>
       </div>
 
-      <!-- Tips -->
-      <div class="text-center mt-5" data-aos="fade-up">
-        <small class="text-muted">
-          ¿Olvidaste la contraseña? Contactanos: <a href="mailto:info@veterinaria.com">info@veterinaria.com</a>
-        </small>
+      <!-- Panel Registro -->
+      <div class="login-panel hidden" id="panelRegistro">
+        <h2>Crear cuenta</h2>
+        <form id="formRegistro" novalidate>
+          <div class="form-group">
+            <label for="regEmail">Email</label>
+            <div class="input-wrapper">
+              <i class="fa fa-envelope input-icon"></i>
+              <input class="form-control" type="email" id="regEmail" placeholder="usuario@mail.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="regPass">Contraseña</label>
+            <div class="input-wrapper">
+              <i class="fa fa-lock input-icon"></i>
+              <input class="form-control" type="password" id="regPass" placeholder="Mínimo 6 caracteres" required style="padding-right:44px">
+              <button type="button" class="toggle-pass" data-target="regPass"><i class="fa fa-eye"></i></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="regConfirm">Confirmar contraseña</label>
+            <div class="input-wrapper">
+              <i class="fa fa-lock input-icon"></i>
+              <input class="form-control" type="password" id="regConfirm" placeholder="Repetí tu contraseña" required style="padding-right:44px">
+              <button type="button" class="toggle-pass" data-target="regConfirm"><i class="fa fa-eye"></i></button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            <span class="spinner"></span>
+            <span class="btn-text">Crear cuenta</span>
+          </button>
+        </form>
+        <div id="registroMsg" style="margin-top:14px"></div>
       </div>
     </div>
-  </main>
+  </div>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-light py-4 mt-5">
-    <div class="container text-center">
-      <p class="mb-1">© 2025 Clínica Veterinaria — Todos los derechos reservados.</p>
-      <small>Av. Principal 1234, Buenos Aires • info@veterinaria.com</small>
-    </div>
-  </footer>
-
-  <!-- Bootstrap & AOS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init({ once:true, duration:900 });</script>
-
-  <!-- LÓGICA AUTH REAL -->
-  <script>
-    const API = "http://localhost/veterinaria/api";
-
-    // Si ya está logueado → volver al inicio
-    (function autoRedirectIfLogged() {
-      const token = localStorage.getItem("token");
-      if (token && token.length > 10) {
-        window.location.href = "index.html";
-      }
-    })();
-
-    // Toggle password
-    function togglePass(id) {
-      const input = document.getElementById(id);
-      input.type = input.type === "password" ? "text" : "password";
-    }
-
-    // Helpers UI
-    function setMsg(elId, text, ok = false) {
-      const el = document.getElementById(elId);
-      el.textContent = text;
-      el.className = ok ? "text-success" : "text-danger";
-    }
-
-    // LOGIN
-    document.getElementById("formLogin").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      setMsg("loginMsg", "Autenticando...");
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPass").value;
-
-      try {
-        const res = await fetch(`${API}/usuarios/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-
-        if (!res.ok || !data.token) {
-          setMsg("loginMsg", data.error || "Credenciales inválidas.");
-          return;
-        }
-
-        localStorage.setItem("token", data.token);
-        setMsg("loginMsg", "Ingreso correcto. Redirigiendo...", true);
-        setTimeout(() => location.href = "index.html", 600);
-      } catch (err) {
-        setMsg("loginMsg", "No se pudo conectar al servidor.");
-        console.error(err);
-      }
-    });
-
-    // REGISTRO
-    document.getElementById("formRegistro").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      setMsg("regMsg", "Creando cuenta...");
-      const email = document.getElementById("regEmail").value.trim();
-      const password = document.getElementById("regPass").value;
-
-      try {
-        const res = await fetch(`${API}/usuarios/registro`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-          setMsg("regMsg", data.error || "No se pudo crear la cuenta.");
-          return;
-        }
-
-        setMsg("regMsg", "Cuenta creada. Ahora podés iniciar sesión ✅", true);
-        // Autocompleta el login con el email registrado
-        document.getElementById("loginEmail").value = email;
-      } catch (err) {
-        setMsg("regMsg", "No se pudo conectar al servidor.");
-        console.error(err);
-      }
-    });
-  </script>
+  <div id="footer-placeholder"></div>
+  <script src="js/auth.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

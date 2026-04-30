@@ -1,143 +1,56 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Clínica Veterinaria — Mis Turnos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Font Awesome -->
+  <link rel="icon" href="imagenes/logoMascota.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .mi-turno-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      transition: transform var(--transition), box-shadow var(--transition);
+      margin-bottom: 16px;
+    }
+    .mi-turno-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .mi-turno-fecha { font-size: 1.05rem; font-weight: 700; color: var(--color-primary); margin-bottom: 8px; }
+    .mi-turno-mascota { font-size: .95rem; color: var(--color-text-muted); }
+    .mi-turno-estado { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
 
-  <!-- AOS -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-  <link rel="icon" href="src/logo3-02.png" type="image/png">
-  <link rel="stylesheet" href="misturnos.css">
+    @media (max-width: 600px) {
+      .mi-turno-card { flex-direction: column; }
+      .mi-turno-estado { align-items: flex-start; }
+    }
+  </style>
 </head>
+<body>
+  <div id="navbar-placeholder"></div>
 
-<body style="font-family:'Poppins',sans-serif;">
+  <div class="page-header">
+    <h1>🗓️ Mis Turnos</h1>
+    <p>Consultá los turnos que ya agendaste y su estado actual.</p>
+  </div>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="imagenes/logoMascota.png" alt="Logo Clínica" height="45" class="me-2">
-        <span class="fw-bold text-dark">Clínica Veterinaria</span>
-      </a>
-      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link text-dark" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="mascotas.html">Mascotas</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">Turnos</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="turnos.html">Pedir turno</a></li>
-              <li><a class="dropdown-item active" href="misturnos.html">Mis turnos</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link text-dark" href="micuenta.html">Mi cuenta</a></li>
-          <li class="nav-item"><a id="authLink" class="btn btn-warning text-white ms-lg-3" href="login.html">Iniciar sesión</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HEADER -->
-  <header class="py-5 text-center bg-light" data-aos="fade-down">
-    <div class="container">
-      <h1 class="fw-bold text-warning mb-3">Mis Turnos</h1>
-      <p class="text-muted">Consultá los turnos que ya agendaste y su estado.</p>
-    </div>
-  </header>
-
-  <!-- LISTA DE TURNOS -->
-  <section id="turnos" class="py-5">
-    <div class="container">
-      <div id="msgTurnos" class="text-center mb-4 text-muted">Cargando tus turnos...</div>
-      <div class="row g-4 justify-content-center" id="listaTurnos">
-        <!-- Se cargan dinámicamente -->
+  <section>
+    <div class="container" style="max-width:800px">
+      <div id="contenedorMisTurnos">
+        <div class="page-loader"><div class="spinner-circle"></div></div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-light py-4 mt-5">
-    <div class="container text-center">
-      <p class="mb-1">© 2025 Clínica Veterinaria — Todos los derechos reservados.</p>
-      <small>Av. Principal 1234, Buenos Aires • info@veterinaria.com</small>
-    </div>
-  </footer>
-
-  <!-- Bootstrap & AOS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init({ duration:1000, once:true });</script>
-
-  <!-- JS FUNCIONAL -->
-  <script>
-    const API = "http://localhost/veterinaria/api";
-    const token = localStorage.getItem("token");
-    const msgTurnos = document.getElementById("msgTurnos");
-    const listaTurnos = document.getElementById("listaTurnos");
-
-    if (!token) {
-      alert("Debes iniciar sesión para ver tus turnos.");
-      window.location.href = "login.html";
-    }
-
-    // 🔹 Cargar turnos del usuario
-    async function cargarTurnos() {
-      try {
-        const res = await fetch(`${API}/turnos/mis-turnos`, {
-          headers: { "Authorization": `Bearer ${token}` }
-        });
-        const data = await res.json();
-
-        if (!res.ok || data.length === 0) {
-          msgTurnos.textContent = "No tenés turnos agendados.";
-          return;
-        }
-
-        mostrarTurnos(data);
-      } catch (err) {
-        msgTurnos.textContent = "Error al cargar tus turnos.";
-        console.error(err);
-      }
-    }
-
-    // 🔹 Mostrar turnos
-    function mostrarTurnos(turnos) {
-      msgTurnos.style.display = "none";
-      listaTurnos.innerHTML = "";
-      turnos.forEach(t => {
-        const card = document.createElement("div");
-        card.classList.add("col-md-4");
-        card.setAttribute("data-aos", "zoom-in");
-        card.innerHTML = `
-          <div class="card border-0 shadow-sm h-100">
-            <div class="card-body text-center">
-              <i class="fa-solid fa-calendar-check fa-2x text-warning mb-3"></i>
-              <h5 class="card-title mb-2">${t.fecha}</h5>
-              <p class="card-text"><strong>Hora:</strong> ${t.hora}</p>
-              <p class="card-text"><strong>Estado:</strong> 
-                <span class="badge bg-${t.estado === 'pendiente' ? 'secondary' : t.estado === 'asistido' ? 'success' : 'danger'} text-capitalize">
-                  ${t.estado}
-                </span>
-              </p>
-            </div>
-          </div>
-        `;
-        listaTurnos.appendChild(card);
-      });
-    }
-
-    cargarTurnos();
-  </script>
+  <div id="footer-placeholder"></div>
+  <script src="js/auth.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
